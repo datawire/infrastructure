@@ -1,3 +1,7 @@
+# --- IntelliJ IDEA ---
+.idea
+
 # --- Terraform ---
 .terraform
 terraform.tfstate*
+plan.out*
