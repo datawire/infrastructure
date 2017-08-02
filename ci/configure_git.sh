@@ -3,13 +3,12 @@ set -euxo pipefail
 
 GH_USERNAME=${GH_USERNAME:?"Variable GH_USERNAME is not set"}
 GH_TOKEN=${GH_TOKEN:?"Variable GH_TOKEN is not set"}
-GH_REPO=${GH_REPO:?"Variable GH_REPO is not set"}
 GH_USER_EMAIL=${GH_USER_EMAIL:?"Variable GH_USER_EMAIL is not set"}
 
 TRAVIS_BRANCH=${TRAVIS_BRANCH:?"Variable TRAVIS_BRANCH is not set"}
 
 set +x
-git remote add upstream "https://$GH_TOKEN@github.com/$GH_REPO.git"
+git remote add upstream "https://$GH_TOKEN@github.com/${TRAVIS_REPO_SLUG}.git"
 set -x
 
 git config user.name  ${GH_USERNAME}

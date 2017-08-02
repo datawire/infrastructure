@@ -20,7 +20,6 @@ env:
     # GitHub Configuration
     - GH_USERNAME="d6e-automaton"
     - GH_USER_EMAIL="dev@datawire.io"
-    - GH_REPO="${TRAVIS_REPO_SLUG}"
 
     # Terraform Version
     - TERRAFORM_VERSION=0.9.11
