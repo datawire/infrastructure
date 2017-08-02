@@ -4,4 +4,6 @@
 # --- Terraform ---
 .terraform
 terraform.tfstate*
-plan.out*
+
+# --- Potentially Sensitive ---
+ci/aws_credentials

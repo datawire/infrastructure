@@ -1,0 +1,61 @@
+---
+sudo: false
+dist: trusty
+language: generic
+
+branches:
+  only:
+    - master
+
+cache:
+  pip: true
+  directories:
+  - "${HOME}/bin"
+
+env:
+  global:
+    - TOOLS_DIR=${HOME}/bin
+    - PATH="${TOOLS_DIR}:${PATH}"
+
+    # GitHub Configuration
+    - GH_USERNAME="d6e-automaton"
+    - GH_USER_EMAIL="dev@datawire.io"
+    - GH_REPO="${TRAVIS_REPO_SLUG}"
+
+    # Terraform Version
+    - TERRAFORM_VERSION=0.9.11
+    - TERRAFORM_SHA256SUM=804d31cfa5fee5c2b1bff7816b64f0e26b1d766ac347c67091adccc2626e16f3
+
+    # Kops Configuration
+    - KOPS_VERSION=1.7.0
+    - KOPS_SHA256SUM=3b65f7c456238457d8246e617e3a9dac4d95d1f4d3f395a1d9e02e9dfd00d839
+
+    # Kubectl Configuration
+    - KUBECTL_VERSION=1.7.2
+    - KUBECTL_SHA256SUM=e0806c9fd584771e74df2bbffb3d07f34b429606056ca47de396ef063dc8ef71
+
+    - secure: "tRM0wiJE29obkX0SHSo/VO2anJj8TjPjRBFFSXcOv2nqkhw/Toq4IGrjao8rNiPkV9t/pI0rsmsdNBQnLRJ9eAa+p460XC4hC2T2UoPX1sXNqAKUgkvIEOGYOQrFniKywzwuE6DkWFPctNaaGpercKrIZlWfGfLAK33LAtyXBO9OSnlQXiCvLjJxfxP/HAtkBqqXZh8Nw43lFi7cs0hHVlWyHdk6LWqJjhQMfuNLu5I4ZH+3nxM6LxNy5v2M9M1N8IcOBGIzd1pj7EGB/vNn9hUfGyMQOQd++BQuEmKhHTR/OKWDMF4uPGdgXLajdIRQg/1CbZUEMWgQheIqGClRvPa8TktyUWTs0xJifhxeHyQ6f/FxSQDLhjMNPLo6NVmBK6TBWa6TanTDuSNkUwXeXFSWWwxbaPMHNbby0FKtwCr48VDk6eUmn78A0xe3u8qqSqVod/YS6O0YT9y1M0FuNsH0wYEBhKoUhhNzsTZ77CsW73cNwiITjz/L4GX82o8hTxofdAvYeuRhAWpruLlIdFtu3aD6jev0uPdYCSvALm4rvaRLM5kdMHEadVLVDjviSxoy8YYPT0b0ad18XoV9gjYvCVcc5vYLZxBiRAa/YIi6PbzmwC+PAY2CEXtVKcBx7jPKj0r/UoFzGOBRcxtVMfymOadZ3Zm7Y6XbXPFLs40="
+
+before_install:
+  - set -e
+  - ci/setup.sh
+
+install:
+  - set -e
+  - ci/install_terraform.sh
+  - ci/install_kubectl.sh
+  - ci/install_kops.sh
+  - pip3 install -Ur requirements.txt
+
+script:
+  - set -e
+  - bash bin/configure_git.sh
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash bin/terraform_plan.sh; fi
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python3 bin/comment_pull_request.py; fi
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: ci/terraform_apply.sh
+    on:
+      branch: master
