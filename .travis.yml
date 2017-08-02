@@ -49,9 +49,9 @@ install:
 
 script:
   - set -e
-  - bash bin/configure_git.sh
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash bin/terraform_plan.sh; fi
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python3 bin/comment_pull_request.py; fi
+  - bash ci/configure_git.sh
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ci/terraform_plan.sh; fi
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python3 ci/comment_pull_request.py; fi
 
 deploy:
   - provider: script
