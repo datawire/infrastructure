@@ -1,0 +1,188 @@
+---
+kind: "Cluster"
+apiVersion: "kops/v1alpha2"
+
+metadata:
+  name: "prod.k736.net"
+
+spec:
+  dnsZone: "k736.net"
+
+  masterPublicName: "api.prod.k736.net"
+
+  configBase: "s3://datawire-kops-state/prod.k736.net"
+
+  api:
+    loadBalancer:
+      type: "Public"
+      idleTimeoutSeconds: 300
+
+  apiAccess:
+    - "0.0.0.0/0"
+
+  sshAccess:
+    - "0.0.0.0/0"
+
+  kubernetesApiAccess:
+    - "0.0.0.0/0"
+
+  channel: "stable"
+
+  cloudProvider: "aws"
+
+  cloudLabels:
+    "datawire.io/environment": "prod"
+
+  authorization:
+    rbac: {}
+
+  etcdClusters:
+    - name: "main"
+      etcdMembers:
+        - name: "a"
+          instanceGroup: "master-us-east-1a"
+          encryptedVolume: true
+        - name: "b"
+          instanceGroup: "master-us-east-1b"
+          encryptedVolume: true
+        - name: "c"
+          instanceGroup: "master-us-east-1c"
+          encryptedVolume: true
+    - name: "events"
+      etcdMembers:
+        - name: "a"
+          instanceGroup: "master-us-east-1a"
+          encryptedVolume: true
+        - name: "b"
+          instanceGroup: "master-us-east-1b"
+          encryptedVolume: true
+        - name: "c"
+          instanceGroup: "master-us-east-1c"
+          encryptedVolume: true
+
+  networkCIDR: "10.1.0.0/16"
+
+  subnets:
+    - name: "us-east-1a"
+      zone: "us-east-1a"
+      cidr: "10.1.0.0/19"
+      type: "Public"
+
+    - name: "us-east-1b"
+      zone: "us-east-1b"
+      cidr: "10.1.32.0/19"
+      type: "Public"
+
+    - name: "us-east-1c"
+      zone: "us-east-1c"
+      cidr: "10.1.64.0/19"
+      type: "Public"
+
+    - name: "us-east-1d"
+      zone: "us-east-1d"
+      cidr: "10.1.96.0/19"
+      type: "Public"
+
+    - name: "us-east-1e"
+      zone: "us-east-1e"
+      cidr: "10.1.128.0/19"
+      type: "Public"
+
+    - name: "us-east-1f"
+      zone: "us-east-1f"
+      cidr: "10.1.160.0/19"
+      type: "Public"
+
+  nonMasqueradeCIDR: "100.64.0.0/10"
+
+  networking:
+    calico:
+      crossSubnet: true
+
+  topology:
+    dns:
+      type: "Public"
+    masters: "public"
+    nodes: "public"
+
+---
+kind: "InstanceGroup"
+apiVersion: "kops/v1alpha2"
+metadata:
+  name: "master-us-east-1a"
+  labels:
+    kops.k8s.io/cluster: "prod.k736.net"
+
+spec:
+  role: "Master"
+  associatePublicIp: true
+  image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
+  machineType: "m4.large"
+  minSize: 1
+  maxSize: 1
+  subnets:
+    - "us-east-1a"
+  tenancy: "default"
+
+---
+kind: "InstanceGroup"
+apiVersion: "kops/v1alpha2"
+metadata:
+  name: "master-us-east-1b"
+  labels:
+    kops.k8s.io/cluster: "prod.k736.net"
+spec:
+  role: "Master"
+  associatePublicIp: true
+  image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
+  machineType: "m4.large"
+  minSize: 1
+  maxSize: 1
+  subnets:
+    - "us-east-1b"
+  tenancy: "default"
+
+---
+kind: "InstanceGroup"
+apiVersion: "kops/v1alpha2"
+metadata:
+  name: "master-us-east-1c"
+  labels:
+    kops.k8s.io/cluster: "prod.k736.net"
+spec:
+  role: "Master"
+  associatePublicIp: true
+  image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
+  machineType: "m4.large"
+  minSize: 1
+  maxSize: 1
+  subnets:
+    - "us-east-1c"
+  tenancy: "default"
+
+---
+kind: "InstanceGroup"
+apiVersion: "kops/v1alpha2"
+metadata:
+  name: "nodes"
+  labels:
+    kops.k8s.io/cluster: "prod.k736.net"
+spec:
+  role: "Node"
+  image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
+  machineType: "r4.large"
+  minSize: 1
+  maxSize: 1
+  maxPrice: "0.018"
+  associatePublicIp: true
+  rootVolumeType: "gp2"
+  rootVolumeOptimization: true
+  rootVolumeSize: 100
+  subnets:
+    - "us-east-1a"
+    - "us-east-1b"
+    - "us-east-1c"
+    - "us-east-1d"
+    - "us-east-1e"
+    - "us-east-1f"
+  tenancy: default

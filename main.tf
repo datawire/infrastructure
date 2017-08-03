@@ -7,3 +7,7 @@ provider "aws" {
 module "public_keys" {
     source = "./public_keys"
 }
+
+module "dns" {
+    source = "./dns"
+}
