@@ -175,7 +175,7 @@ spec:
   machineType: "r4.large"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.018"
+  maxPrice: "0.05"
   associatePublicIp: true
   rootVolumeType: "gp2"
   rootVolumeOptimization: true
