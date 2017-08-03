@@ -156,8 +156,8 @@ resource "aws_autoscaling_group" "master-us-east-1c-masters-prod-k736-net" {
 resource "aws_autoscaling_group" "nodes-prod-k736-net" {
   name                 = "nodes.prod.k736.net"
   launch_configuration = "${aws_launch_configuration.nodes-prod-k736-net.id}"
-  max_size             = 1
-  min_size             = 1
+  max_size             = 3
+  min_size             = 3
   vpc_zone_identifier  = ["${aws_subnet.us-east-1a-prod-k736-net.id}", "${aws_subnet.us-east-1b-prod-k736-net.id}", "${aws_subnet.us-east-1c-prod-k736-net.id}", "${aws_subnet.us-east-1d-prod-k736-net.id}", "${aws_subnet.us-east-1e-prod-k736-net.id}", "${aws_subnet.us-east-1f-prod-k736-net.id}"]
 
   tag = {
@@ -286,7 +286,7 @@ resource "aws_elb" "api-prod-k736-net" {
   }
 
   security_groups = ["${aws_security_group.api-elb-prod-k736-net.id}"]
-  subnets         = ["${aws_subnet.us-east-1b-prod-k736-net.id}", "${aws_subnet.us-east-1c-prod-k736-net.id}", "${aws_subnet.us-east-1d-prod-k736-net.id}", "${aws_subnet.us-east-1e-prod-k736-net.id}", "${aws_subnet.us-east-1f-prod-k736-net.id}", "${aws_subnet.us-east-1a-prod-k736-net.id}"]
+  subnets         = ["${aws_subnet.us-east-1c-prod-k736-net.id}", "${aws_subnet.us-east-1d-prod-k736-net.id}", "${aws_subnet.us-east-1e-prod-k736-net.id}", "${aws_subnet.us-east-1f-prod-k736-net.id}", "${aws_subnet.us-east-1a-prod-k736-net.id}", "${aws_subnet.us-east-1b-prod-k736-net.id}"]
 
   health_check = {
     target              = "TCP:443"
