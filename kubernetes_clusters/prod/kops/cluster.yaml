@@ -173,8 +173,8 @@ spec:
   role: "Node"
   image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
   machineType: "r4.large"
-  minSize: 1
-  maxSize: 1
+  minSize: 3
+  maxSize: 3
   maxPrice: "0.05"
   associatePublicIp: true
   rootVolumeType: "gp2"
