@@ -26,6 +26,8 @@ spec:
   kubernetesApiAccess:
     - "0.0.0.0/0"
 
+  kubernetesVersion: "1.7.2"
+
   channel: "stable"
 
   cloudProvider: "aws"
@@ -185,4 +187,3 @@ spec:
     - "us-east-1d"
     - "us-east-1e"
     - "us-east-1f"
-  tenancy: default

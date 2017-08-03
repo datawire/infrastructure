@@ -441,8 +441,7 @@ resource "aws_launch_configuration" "nodes-prod-k736-net" {
     create_before_destroy = true
   }
 
-  spot_price        = "0.018"
-  placement_tenancy = "default"
+  spot_price = "0.018"
 }
 
 resource "aws_route" "0-0-0-0--0" {
