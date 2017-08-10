@@ -124,7 +124,6 @@ spec:
   maxPrice: "0.03"
   subnets:
     - "us-east-1c"
-  tenancy: "default"
 
 ---
 kind: "InstanceGroup"
@@ -143,7 +142,6 @@ spec:
   maxPrice: "0.03"
   subnets:
     - "us-east-1d"
-  tenancy: "default"
 
 ---
 kind: "InstanceGroup"
@@ -162,7 +160,6 @@ spec:
   maxPrice: "0.03"
   subnets:
     - "us-east-1e"
-  tenancy: "default"
 
 ---
 kind: "InstanceGroup"
