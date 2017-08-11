@@ -12,8 +12,7 @@ resource "aws_iam_user" "kubernaut_backend" {
   path = "/cloud/"
 }
 
-resource "aws_iam_policy_attachment" "kubernaut_backend" {
-  name       = "kubernaut_backend_policy_attachment"
-  users      = ["${aws_iam_policy.kubernaut_backend_policy.name}"]
+resource "aws_iam_user_policy_attachment" "test-attach" {
+  user       = "${aws_iam_user.kubernaut_backend.name}"
   policy_arn = "${aws_iam_policy.kubernaut_backend_policy.arn}"
 }
