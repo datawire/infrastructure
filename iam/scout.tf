@@ -12,7 +12,7 @@ resource "aws_iam_user" "scout" {
   path = "/cloud/"
 }
 
-resource "aws_iam_user_policy_attachment" "test-attach" {
+resource "aws_iam_user_policy_attachment" "scout_attachment" {
   user       = "${aws_iam_user.scout.name}"
   policy_arn = "${aws_iam_policy.scout_policy.arn}"
 }
