@@ -4,7 +4,8 @@
     {
       "Effect": "Allow",
       "Action": [
-        "ec2:Describe*"
+        "ec2:Describe*",
+        "autoscaling:*"
       ],
       "Resource": [
         "*"

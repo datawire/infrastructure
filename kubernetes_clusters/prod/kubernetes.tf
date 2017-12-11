@@ -286,7 +286,7 @@ resource "aws_elb" "api-prod-k736-net" {
   }
 
   security_groups = ["${aws_security_group.api-elb-prod-k736-net.id}"]
-  subnets         = ["${aws_subnet.us-east-1c-prod-k736-net.id}", "${aws_subnet.us-east-1d-prod-k736-net.id}", "${aws_subnet.us-east-1e-prod-k736-net.id}", "${aws_subnet.us-east-1f-prod-k736-net.id}", "${aws_subnet.us-east-1a-prod-k736-net.id}", "${aws_subnet.us-east-1b-prod-k736-net.id}"]
+  subnets         = ["${aws_subnet.us-east-1b-prod-k736-net.id}", "${aws_subnet.us-east-1c-prod-k736-net.id}", "${aws_subnet.us-east-1d-prod-k736-net.id}", "${aws_subnet.us-east-1e-prod-k736-net.id}", "${aws_subnet.us-east-1f-prod-k736-net.id}", "${aws_subnet.us-east-1a-prod-k736-net.id}"]
 
   health_check = {
     target              = "TCP:443"
@@ -370,7 +370,7 @@ resource "aws_launch_configuration" "master-us-east-1a-masters-prod-k736-net" {
     create_before_destroy = true
   }
 
-  placement_tenancy = "default"
+  spot_price = "0.06"
 }
 
 resource "aws_launch_configuration" "master-us-east-1b-masters-prod-k736-net" {
@@ -393,7 +393,7 @@ resource "aws_launch_configuration" "master-us-east-1b-masters-prod-k736-net" {
     create_before_destroy = true
   }
 
-  placement_tenancy = "default"
+  spot_price = "0.06"
 }
 
 resource "aws_launch_configuration" "master-us-east-1c-masters-prod-k736-net" {
@@ -416,7 +416,7 @@ resource "aws_launch_configuration" "master-us-east-1c-masters-prod-k736-net" {
     create_before_destroy = true
   }
 
-  placement_tenancy = "default"
+  spot_price = "0.06"
 }
 
 resource "aws_launch_configuration" "nodes-prod-k736-net" {
@@ -441,7 +441,7 @@ resource "aws_launch_configuration" "nodes-prod-k736-net" {
     create_before_destroy = true
   }
 
-  spot_price = "0.05"
+  spot_price = "0.03"
 }
 
 resource "aws_route" "0-0-0-0--0" {

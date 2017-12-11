@@ -121,7 +121,7 @@ spec:
   machineType: "m3.medium"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.03"
+  maxPrice: "0.05"
   subnets:
     - "us-east-1c"
 
@@ -139,7 +139,7 @@ spec:
   machineType: "m3.medium"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.03"
+  maxPrice: "0.05"
   subnets:
     - "us-east-1d"
 
@@ -157,7 +157,7 @@ spec:
   machineType: "m3.medium"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.03"
+  maxPrice: "0.05"
   subnets:
     - "us-east-1e"
 
@@ -174,7 +174,7 @@ spec:
   machineType: "r4.large"
   minSize: 3
   maxSize: 3
-  maxPrice: "0.05"
+  maxPrice: "0.03"
   associatePublicIp: true
   rootVolumeType: "gp2"
   rootVolumeOptimization: true

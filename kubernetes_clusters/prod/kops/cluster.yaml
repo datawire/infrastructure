@@ -122,9 +122,9 @@ spec:
   machineType: "m4.large"
   minSize: 1
   maxSize: 1
+  maxPrice: "0.06"
   subnets:
     - "us-east-1a"
-  tenancy: "default"
 
 ---
 kind: "InstanceGroup"
@@ -140,9 +140,9 @@ spec:
   machineType: "m4.large"
   minSize: 1
   maxSize: 1
+  maxPrice: "0.06"
   subnets:
     - "us-east-1b"
-  tenancy: "default"
 
 ---
 kind: "InstanceGroup"
@@ -158,9 +158,9 @@ spec:
   machineType: "m4.large"
   minSize: 1
   maxSize: 1
+  maxPrice: "0.06"
   subnets:
     - "us-east-1c"
-  tenancy: "default"
 
 ---
 kind: "InstanceGroup"
@@ -175,7 +175,7 @@ spec:
   machineType: "r4.large"
   minSize: 3
   maxSize: 3
-  maxPrice: "0.05"
+  maxPrice: "0.03"
   associatePublicIp: true
   rootVolumeType: "gp2"
   rootVolumeOptimization: true
