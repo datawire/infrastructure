@@ -2,16 +2,78 @@
   "Version": "2012-10-17",
   "Statement": [
     {
+      "Sid": "kopsK8sEC2NodePerms",
       "Effect": "Allow",
       "Action": [
-        "ec2:Describe*",
-        "autoscaling:*"
+        "ec2:DescribeInstances"
       ],
       "Resource": [
         "*"
       ]
     },
     {
+      "Sid": "kopsK8sS3GetListBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::datawire-kops-state"
+      ]
+    },
+    {
+      "Sid": "kopsK8sS3BucketFullAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": "arn:aws:s3:::datawire-kops-state/prod.k736.net/*"
+    },
+    {
+      "Sid": "kopsK8sRoute53Change",
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListResourceRecordSets",
+        "route53:GetHostedZone"
+      ],
+      "Resource": [
+        "arn:aws:route53:::hostedzone/Z1IYOJY1Q5L0EB"
+      ]
+    },
+    {
+      "Sid": "kopsK8sRoute53GetChanges",
+      "Effect": "Allow",
+      "Action": [
+        "route53:GetChange"
+      ],
+      "Resource": [
+        "arn:aws:route53:::change/*"
+      ]
+    },
+    {
+      "Sid": "kopsK8sRoute53ListZones",
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "kopsK8sECR",
       "Effect": "Allow",
       "Action": [
         "ecr:GetAuthorizationToken",
@@ -24,55 +86,6 @@
       ],
       "Resource": [
         "*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "route53:ChangeResourceRecordSets",
-        "route53:ListResourceRecordSets",
-        "route53:GetHostedZone"
-      ],
-      "Resource": [
-        "arn:aws:route53:::hostedzone/Z1IYOJY1Q5L0EB"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "route53:GetChange"
-      ],
-      "Resource": [
-        "arn:aws:route53:::change/*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "route53:ListHostedZones"
-      ],
-      "Resource": [
-        "*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:*"
-      ],
-      "Resource": [
-        "arn:aws:s3:::datawire-kops-state/prod.k736.net",
-        "arn:aws:s3:::datawire-kops-state/prod.k736.net/*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetBucketLocation",
-        "s3:ListBucket"
-      ],
-      "Resource": [
-        "arn:aws:s3:::datawire-kops-state"
       ]
     }
   ]

@@ -122,7 +122,7 @@ spec:
   machineType: "m4.large"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.06"
+  maxPrice: "0.10"
   subnets:
     - "us-east-1a"
 
@@ -140,7 +140,7 @@ spec:
   machineType: "m4.large"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.06"
+  maxPrice: "0.10"
   subnets:
     - "us-east-1b"
 
@@ -158,7 +158,7 @@ spec:
   machineType: "m4.large"
   minSize: 1
   maxSize: 1
-  maxPrice: "0.06"
+  maxPrice: "0.10"
   subnets:
     - "us-east-1c"
 
@@ -173,9 +173,9 @@ spec:
   role: "Node"
   image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
   machineType: "r4.large"
-  minSize: 3
-  maxSize: 3
-  maxPrice: "0.03"
+  minSize: 6
+  maxSize: 6
+  maxPrice: "0.14"
   associatePublicIp: true
   rootVolumeType: "gp2"
   rootVolumeOptimization: true
