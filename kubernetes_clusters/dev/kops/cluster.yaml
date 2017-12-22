@@ -119,8 +119,8 @@ spec:
   associatePublicIp: true
   image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
   machineType: "m3.medium"
-  minSize: 1
-  maxSize: 1
+  minSize: 0
+  maxSize: 0
   maxPrice: "0.05"
   subnets:
     - "us-east-1c"
@@ -137,8 +137,8 @@ spec:
   associatePublicIp: true
   image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
   machineType: "m3.medium"
-  minSize: 1
-  maxSize: 1
+  minSize: 0
+  maxSize: 0
   maxPrice: "0.05"
   subnets:
     - "us-east-1d"
@@ -155,8 +155,8 @@ spec:
   associatePublicIp: true
   image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
   machineType: "m3.medium"
-  minSize: 1
-  maxSize: 1
+  minSize: 0
+  maxSize: 0
   maxPrice: "0.05"
   subnets:
     - "us-east-1e"
@@ -172,8 +172,8 @@ spec:
   role: "Node"
   image: "kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02"
   machineType: "r4.large"
-  minSize: 3
-  maxSize: 3
+  minSize: 0
+  maxSize: 0
   maxPrice: "0.03"
   associatePublicIp: true
   rootVolumeType: "gp2"
