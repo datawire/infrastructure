@@ -38,6 +38,8 @@ env:
 
 before_install:
   - set -e
+  - python --version
+  - pip --version
   - ci/setup.sh
 
 install:
@@ -45,7 +47,7 @@ install:
   - ci/install_terraform.sh
   - ci/install_kubectl.sh
   - ci/install_kops.sh
-  - pip install -Ur requirements.txt
+  - pip install --user -Ur requirements.txt
 
 script:
   - set -e
