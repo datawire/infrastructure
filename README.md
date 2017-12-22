@@ -6,6 +6,12 @@
 
 Core / common infrastructure definition and automation for Datawire's backend.
 
+# Cluster Management
+
+## Add / Remove Workers
+
+## Upgrade Cluster
+
 # License
 
 Licensed under Apache 2.0. Please read [LICENSE](LICENSE) for details.
