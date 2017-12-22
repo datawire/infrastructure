@@ -45,13 +45,13 @@ install:
   - ci/install_terraform.sh
   - ci/install_kubectl.sh
   - ci/install_kops.sh
-  - pip3 install -Ur requirements.txt
+  - pip install -Ur requirements.txt
 
 script:
   - set -e
   - bash ci/configure_git.sh
   - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ci/terraform_plan.sh; fi
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python3 ci/comment_pull_request.py; fi
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python ci/comment_pull_request.py; fi
 
 deploy:
   - provider: script
