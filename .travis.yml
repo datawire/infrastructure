@@ -22,8 +22,8 @@ env:
     - GH_USER_EMAIL="dev@datawire.io"
 
     # Terraform Version
-    - TERRAFORM_VERSION=0.9.11
-    - TERRAFORM_SHA256SUM=804d31cfa5fee5c2b1bff7816b64f0e26b1d766ac347c67091adccc2626e16f3
+    - TERRAFORM_VERSION=0.11.1
+    - TERRAFORM_SHA256SUM=4e3d5e4c6a267e31e9f95d4c1b00f5a7be5a319698f0370825b459cb786e2f35
 
     # Kops Configuration
     - KOPS_VERSION=1.7.0
