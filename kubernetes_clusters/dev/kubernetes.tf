@@ -60,8 +60,8 @@ resource "aws_autoscaling_attachment" "master-us-east-1e-masters-dev-k736-net" {
 resource "aws_autoscaling_group" "master-us-east-1c-masters-dev-k736-net" {
   name                 = "master-us-east-1c.masters.dev.k736.net"
   launch_configuration = "${aws_launch_configuration.master-us-east-1c-masters-dev-k736-net.id}"
-  max_size             = 1
-  min_size             = 1
+  max_size             = 0
+  min_size             = 0
   vpc_zone_identifier  = ["${aws_subnet.us-east-1c-dev-k736-net.id}"]
 
   tag = {
@@ -92,8 +92,8 @@ resource "aws_autoscaling_group" "master-us-east-1c-masters-dev-k736-net" {
 resource "aws_autoscaling_group" "master-us-east-1d-masters-dev-k736-net" {
   name                 = "master-us-east-1d.masters.dev.k736.net"
   launch_configuration = "${aws_launch_configuration.master-us-east-1d-masters-dev-k736-net.id}"
-  max_size             = 1
-  min_size             = 1
+  max_size             = 0
+  min_size             = 0
   vpc_zone_identifier  = ["${aws_subnet.us-east-1d-dev-k736-net.id}"]
 
   tag = {
@@ -124,8 +124,8 @@ resource "aws_autoscaling_group" "master-us-east-1d-masters-dev-k736-net" {
 resource "aws_autoscaling_group" "master-us-east-1e-masters-dev-k736-net" {
   name                 = "master-us-east-1e.masters.dev.k736.net"
   launch_configuration = "${aws_launch_configuration.master-us-east-1e-masters-dev-k736-net.id}"
-  max_size             = 1
-  min_size             = 1
+  max_size             = 0
+  min_size             = 0
   vpc_zone_identifier  = ["${aws_subnet.us-east-1e-dev-k736-net.id}"]
 
   tag = {
@@ -156,8 +156,8 @@ resource "aws_autoscaling_group" "master-us-east-1e-masters-dev-k736-net" {
 resource "aws_autoscaling_group" "nodes-dev-k736-net" {
   name                 = "nodes.dev.k736.net"
   launch_configuration = "${aws_launch_configuration.nodes-dev-k736-net.id}"
-  max_size             = 3
-  min_size             = 3
+  max_size             = 0
+  min_size             = 0
   vpc_zone_identifier  = ["${aws_subnet.us-east-1a-dev-k736-net.id}", "${aws_subnet.us-east-1b-dev-k736-net.id}", "${aws_subnet.us-east-1c-dev-k736-net.id}", "${aws_subnet.us-east-1d-dev-k736-net.id}", "${aws_subnet.us-east-1e-dev-k736-net.id}", "${aws_subnet.us-east-1f-dev-k736-net.id}"]
 
   tag = {
@@ -289,7 +289,7 @@ resource "aws_elb" "api-dev-k736-net" {
   subnets         = ["${aws_subnet.us-east-1a-dev-k736-net.id}", "${aws_subnet.us-east-1b-dev-k736-net.id}", "${aws_subnet.us-east-1c-dev-k736-net.id}", "${aws_subnet.us-east-1d-dev-k736-net.id}", "${aws_subnet.us-east-1e-dev-k736-net.id}", "${aws_subnet.us-east-1f-dev-k736-net.id}"]
 
   health_check = {
-    target              = "TCP:443"
+    target              = "SSL:443"
     healthy_threshold   = 2
     unhealthy_threshold = 2
     interval            = 10
@@ -631,11 +631,20 @@ resource "aws_security_group_rule" "node-to-master-protocol-ipip" {
   protocol                 = "4"
 }
 
-resource "aws_security_group_rule" "node-to-master-tcp-1-4001" {
+resource "aws_security_group_rule" "node-to-master-tcp-1-2379" {
   type                     = "ingress"
   security_group_id        = "${aws_security_group.masters-dev-k736-net.id}"
   source_security_group_id = "${aws_security_group.nodes-dev-k736-net.id}"
   from_port                = 1
+  to_port                  = 2379
+  protocol                 = "tcp"
+}
+
+resource "aws_security_group_rule" "node-to-master-tcp-2382-4001" {
+  type                     = "ingress"
+  security_group_id        = "${aws_security_group.masters-dev-k736-net.id}"
+  source_security_group_id = "${aws_security_group.nodes-dev-k736-net.id}"
+  from_port                = 2382
   to_port                  = 4001
   protocol                 = "tcp"
 }
@@ -685,6 +694,7 @@ resource "aws_subnet" "us-east-1a-dev-k736-net" {
     KubernetesCluster                    = "dev.k736.net"
     Name                                 = "us-east-1a.dev.k736.net"
     "kubernetes.io/cluster/dev.k736.net" = "owned"
+    "kubernetes.io/role/elb"             = "1"
   }
 }
 
@@ -697,6 +707,7 @@ resource "aws_subnet" "us-east-1b-dev-k736-net" {
     KubernetesCluster                    = "dev.k736.net"
     Name                                 = "us-east-1b.dev.k736.net"
     "kubernetes.io/cluster/dev.k736.net" = "owned"
+    "kubernetes.io/role/elb"             = "1"
   }
 }
 
@@ -709,6 +720,7 @@ resource "aws_subnet" "us-east-1c-dev-k736-net" {
     KubernetesCluster                    = "dev.k736.net"
     Name                                 = "us-east-1c.dev.k736.net"
     "kubernetes.io/cluster/dev.k736.net" = "owned"
+    "kubernetes.io/role/elb"             = "1"
   }
 }
 
@@ -721,6 +733,7 @@ resource "aws_subnet" "us-east-1d-dev-k736-net" {
     KubernetesCluster                    = "dev.k736.net"
     Name                                 = "us-east-1d.dev.k736.net"
     "kubernetes.io/cluster/dev.k736.net" = "owned"
+    "kubernetes.io/role/elb"             = "1"
   }
 }
 
@@ -733,6 +746,7 @@ resource "aws_subnet" "us-east-1e-dev-k736-net" {
     KubernetesCluster                    = "dev.k736.net"
     Name                                 = "us-east-1e.dev.k736.net"
     "kubernetes.io/cluster/dev.k736.net" = "owned"
+    "kubernetes.io/role/elb"             = "1"
   }
 }
 
@@ -745,6 +759,7 @@ resource "aws_subnet" "us-east-1f-dev-k736-net" {
     KubernetesCluster                    = "dev.k736.net"
     Name                                 = "us-east-1f.dev.k736.net"
     "kubernetes.io/cluster/dev.k736.net" = "owned"
+    "kubernetes.io/role/elb"             = "1"
   }
 }
 
